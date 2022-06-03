@@ -1,0 +1,5 @@
+docker build .
+docker run -it container_name - interactive..waiting to enter something.
+docker ps - just to check if the container is finished normally
+docker ps -a - to see all containers(running and stopped)
+docker start -a -i container_name
