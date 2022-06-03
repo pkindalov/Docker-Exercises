@@ -16,6 +16,19 @@ It is better to restart container with this command instead of docker run
 docker run -it container_name - interactive..waiting to enter something.
 docker start -a -i container_name - restart container in attach and interactive mode.
 
+docker rm container_name - removes container but if it is stopped. If it is running then an error is thrown. It is possible to
+remove more containers at one. Just must be separate with space each other. For example
+
+docker rm container_name1 container_name2 container_name3 container_name4
+
+docker images - show list with  all images we have
+
+docker rmi - removes images. We can remove images only if they are not used from some container without matter if it
+is stopped or not. Container must be removed first.
+
+docker image prune - this command remove all unused images.
+
+
 
 
 IMPORTANT
