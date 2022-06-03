@@ -4,7 +4,29 @@ docker run -p 3000:3000 sha256:e9b3adb646af0498a6a89282c7e8dde24a9ae619513abcdc4
 
 3.docker ps / to get the name of container. In this case it is stupefied_babbage /
 /ps - stands for processes/
-docker ps - a will show all the containers 
+docker ps - a will show all the containers. Including the stopped ones.
 
 4.docker stop naughty_dirac
 
+5.docker ps --help you will see all available config options for the command docker ps
+
+6.docker start container_name  - restart stopped container. If there are no changes in the code
+It is better to restart container with this command instead of docker run
+
+
+
+IMPORTANT
+
+docker run - you create a new container based on the image every time. Also, this command
+is BLOCKING THE TERMINAL. Attach(means that we are listening to the output of that container. For example what is printed to the console.) mode is the default.
+
+ It can be start on detach mode through the -d parameter. For example:
+docker run -d container_name.
+
+We can attach to the container again through the command attach. For example
+docker attack container_name 
+
+docker start - NOT BLOCKING THE TERMINAL. Detach mode is by default.
+
+docker logs container_logs - show to us past logs that were printed by that container
+docker logs -f container_name we can attach again to the container
