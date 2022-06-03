@@ -1,0 +1,10 @@
+1.docker build .
+2.docker run sha256:1b8efcfe223500a581ab7077cb6e6d71409a1076f376b08e9f9b011720e3d487
+docker run -p 3000:3000 sha256:e9b3adb646af0498a6a89282c7e8dde24a9ae619513abcdc4cbd84d6e174eef7
+
+3.docker ps / to get the name of container. In this case it is stupefied_babbage /
+/ps - stands for processes/
+docker ps - a will show all the containers 
+
+4.docker stop naughty_dirac
+
