@@ -1,0 +1,3 @@
+docker build . 
+docker run -p 3000:3000 sha256:e9b3adb646af0498a6a89282c7e8dde24a9ae619513abcdc4cbd84d6e174eef7
+docker stop stupefied_babbage
