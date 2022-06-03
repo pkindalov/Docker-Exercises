@@ -1,0 +1,5 @@
+1.docker build .
+2.docker run sha256:1b8efcfe223500a581ab7077cb6e6d71409a1076f376b08e9f9b011720e3d487
+3.docker ps
+4.docker stop naughty_dirac
+docker run -p 3000:80 1b8efcfe223500a581ab7077cb6e6d71409a1076f376b08e9f9b011720e3d487
