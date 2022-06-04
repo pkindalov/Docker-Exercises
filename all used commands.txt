@@ -27,6 +27,22 @@ docker rmi - removes images. We can remove images only if they are not used from
 is stopped or not. Container must be removed first.
 
 docker image prune - this command remove all unused images.
+docker run -p 3000:80 -d --rm container_name (--rm flag in this case makes container automatically to be deleted when it is been stopped)
+
+docker image inspect image_id(can be get when execute command docker images)  - give you information about the image
+
+docker cp - it allows you to copy files or folders into a running container or out of a running container
+docker cp source destination(will be created if it not exists)
+example usages of docker cp command
+(name of the container can be get using the command docker ps)
+
+//the next commands puts all files form dummy directory in test directory located in the container
+docker cp dummy/test.txt  container_name:/test. 
+docker cp dummy/. container_name:/test
+
+//the next command puts all files from test directory in container to the dummy directory located 
+somewhere outside of the container.
+docker cp container_name:/test dummy
 
 
 
