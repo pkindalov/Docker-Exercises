@@ -57,6 +57,11 @@ name (or repository of your image) : tag
 Example using of the command:
 docker build  -t goals:latest .
 
+//it is possible to rename an image with the command tag. It makes a clone with the new name of the existing image. The old one continue to exists. Another way is to build again the image with the new name
+
+docker tag oldName newName. For example
+docker tag node-demo:latest academind/node-hello-world
+
 
 
 IMPORTANT
