@@ -1,0 +1,6 @@
+docker build -t node:hello .
+docker run -p 3000:3000 --rm --name hello node:hello
+
+
+docker build -t python:bodyMassIndex .
+docker run -p 80:80 -it --rm --name bodyMassIndex python:bodyMassIndex
