@@ -44,6 +44,18 @@ docker cp dummy/. container_name:/test
 somewhere outside of the container.
 docker cp container_name:/test dummy
 
+//--name flag permits you to put a name of the container. For example
+docker run -p 3000:80 -d --rm --name your_app_name container_id
+after executing this command and run docker ps you must be able to see your_app_name in the name field of the
+container
+
+//you can assign name of the images too. The name of the image is called a tag. Images tags consists 2 parts
+name (or repository of your image) : tag
+
+//With the name you can set a general name of your image. For example node
+//With tag you can put a more specialized version of that image. For example 14
+Example using of the command:
+docker build  -t goals:latest .
 
 
 
