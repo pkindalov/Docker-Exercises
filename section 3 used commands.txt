@@ -1,2 +1,10 @@
 docker build -t feedback-node . 
 docker run -p 3000:80 -d --name feedback-app --rm feedback-node
+docker stop feedback-app
+
+In Dockerfile
+VOLUME [ "/app/feedback" ]
+
+docker build -t feedback-node:volumes .
+docker run -p 3000:80 -d --rm --name feedback-app feedback-node:volumes
+docker logs feedback-app
