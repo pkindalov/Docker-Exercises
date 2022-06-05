@@ -8,3 +8,12 @@ VOLUME [ "/app/feedback" ]
 docker build -t feedback-node:volumes .
 docker run -p 3000:80 -d --rm --name feedback-app feedback-node:volumes
 docker logs feedback-app
+
+docker volume ls 
+
+docker rmi feedback-node:volumes
+docker build -t feedback-node:volumes .
+docker run -d -p 3000:80 --rm --name feedback -app -v feedback:/app/feedback feedback-node:volumes
+docker stop feedback-app
+docker volume ls
+docker volume rm VOL_NAME or docker volume prune.
