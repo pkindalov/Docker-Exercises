@@ -17,3 +17,14 @@ docker run -d -p 3000:80 --rm --name feedback -app -v feedback:/app/feedback fee
 docker stop feedback-app
 docker volume ls
 docker volume rm VOL_NAME or docker volume prune.
+
+//binding mounts
+//IMPORTANT NOTE - to be sure that docker has access to the folder. You can check this clicking
+//on the docker icon then preferences / resources / file sharing. Your folder which you are sharing
+//right now must be listed here. The parent folder of the folder you are sharing.
+//THIS OPTION IS AVAILABLE FOR MACOS
+
+docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/username/Desktop/Docker-Exercises/section 3.2 data-volumes-03-adj-node-code:/app" feedback-node:volumes
+
+//attaching anonymous volume to not overwrite the node_modules folder 
+docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/username/Desktop/Docker-Exercises/section 3.2 data-volumes-03-adj-node-code:/app" -v /app/node_modules feedback-node:volumes
