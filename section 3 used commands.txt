@@ -28,3 +28,11 @@ docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/User
 
 //attaching anonymous volume to not overwrite the node_modules folder 
 docker run -d -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/username/Desktop/Docker-Exercises/section 3.2 data-volumes-03-adj-node-code:/app" -v /app/node_modules feedback-node:volumes
+
+docker volume ls - list all currently active volumes
+docker volume create feedback-files - we can create volumes on own by this command. More info for using it can see writing docker volume --help or docker volume create --help
+
+docker volume inspect feedback(name of the volume. You can check yours by running the command docker volume ls)
+
+docker volume rm feedback-files(your volume name here.)
+More commands about volumes can be find by executing the following command - docker volume --help
