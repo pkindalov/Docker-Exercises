@@ -36,3 +36,17 @@ docker volume inspect feedback(name of the volume. You can check yours by runnin
 
 docker volume rm feedback-files(your volume name here.)
 More commands about volumes can be find by executing the following command - docker volume --help
+
+Docker run -d --rm -p 3000:8000 --env PORT=8000 --name feedback-app -v feedback:/app/feedback -v "Users/username/Desktop/Docker-Exercises/section 3.2 data-volumes-03-adj-node-code:/app:ro(means read-only)" -v /app/node_modules -v /app/temp feedback-node:env
+
+//Also --env can be replace with just -e and also we can add more environment variables by the following way
+
+docker run -d --rm -p 3000:8000 --e PORT=8000 -e SECOND_VARIABLE=second_value --name feedback-app -v feedback:/app/feedback -v "Users/username/Desktop/Docker-Exercises/section 3.2 data-volumes-03-adj-node-code:/app:ro(means read-only)" -v /app/node_modules -v /app/temp feedback-node:env
+
+//It is possible to read environment settings form a .env file. Example usage
+
+docker run -d --rm -p 3000:8000 --env-file ./.env --name feedback-app -v feedback:/app/feedback -v "Users/username/Desktop/Docker-Exercises/section 3.2 data-volumes-03-adj-node-code:/app:ro(means read-only)" -v /app/node_modules -v /app/temp feedback-node:env
+
+
+Docker build -t feedback-node:web-app
+Docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .
