@@ -1,0 +1,8 @@
+docker build -t favorites-node .
+docker run --name favorites --rm -d -p 3000:3000 favorites-nodes
+docker run --name favorites --rm -p 3000:3000 favorites-nodes
+docker stop favorites
+
+//host.docker.internal - can be used where you need a domain in docker. It is transforming to
+//IP address by docker
+localhost == host.docker.internal
