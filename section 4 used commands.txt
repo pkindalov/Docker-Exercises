@@ -6,3 +6,36 @@ docker stop favorites
 //host.docker.internal - can be used where you need a domain in docker. It is transforming to
 //IP address by docker
 localhost == host.docker.internal
+
+docker run -d --name mongodb mongo
+
+//with the following command we can see IP of the container and use it to connect it with
+//other containers.
+
+docker container inspect mongoldb 
+
+//after execute this command you must see something like that
+
+ "Ports": {
+                "27017/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/19ce0468be44",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "5d86dcf887c0dbe2394cbc949b1b2a01d6aa7d9b229f9dd894769cd1582e50c4",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+
+docker build -t favourites-node .
+docker run --name favorites -d --rm -p 3000:3000 favorites-node
+docker ps
