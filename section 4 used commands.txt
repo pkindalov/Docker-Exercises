@@ -39,3 +39,36 @@ docker container inspect mongoldb
 docker build -t favourites-node .
 docker run --name favorites -d --rm -p 3000:3000 favorites-node
 docker ps
+
+
+docker run -d --name mongodb --network favourites-net mongo
+docker stop mongoldb
+docker container prune
+
+//Unlike the volumes, docker will NOT create network automatically. Instead, you must create network
+//on your own
+docker run -d --name mongodb --network favorites-net mongo
+8e74f5b416029c5613116d46e139d971ff467dbc2acd97a5ab5d3710027535b6
+
+docker: Error response from daemon: network favorites-net not found.
+
+docker rm mongoldb
+
+docker network --help
+docker network create favourites-net
+docker network ls //to see all available network
+docker run -d --name mongodb --network favorites-net mongo
+
+"mongodb://mongodb:27017/swfavorites" 
+
+//here from part mongodb:27017, mongodb is a name of the container
+//this will work if the containers are part of the same network
+
+docker build -t favorites-node .
+docker run --name favorites --network favorites-net -d --rm -p 3000:3000 favorites-node
+
+
+//IMPORTANT
+//request to the web servers etc... in containers are always possible
+//request to the localhost must use host.docker.internal
+//cross container request - looking for ip on the container with docker container inspect container_name or even better if create a network and then just use container name

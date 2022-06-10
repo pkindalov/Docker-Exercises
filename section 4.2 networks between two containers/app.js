@@ -67,8 +67,9 @@ app.get("/people", async (req, res) => {
   }
 });
 
+//mongodb:27017 - mongodb is a name of the container
 mongoose.connect(
-  "mongodb://172.17.0.2:27017/swfavorites",
+  "mongodb://mongodb:27017/swfavorites",
   { useNewUrlParser: true },
   (err) => {
     if (err) {
