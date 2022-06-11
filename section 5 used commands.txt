@@ -7,7 +7,7 @@ docker logs mongodb
 
 //Commands used to dockerize nodes app
 
-1.creating docker file to put project into a container
+1.creating dockerfile to make an image and use it to create a container with the project later
 
 FROM node:14
 
@@ -53,3 +53,32 @@ docker run --name goals-backend --rm goals-node
 docker stop goals-backend
 
 docker run --name goals-backend --rm -d -p 80:80 goals-node
+
+
+//commands used to dockerize React SPA app
+
+1.creating dockerfile to make an image and use it to create a container with the project later
+
+FROM node
+
+WORKDIR /app
+
+COPY package.json /app
+
+RUN npm install
+
+COPY . /app
+
+EXPOSE 3000
+
+CMD [ "npm" , "start"]
+
+
+2.Buid image from a dockerfile 
+
+docker build -t goals-react .
+
+docker run --name goals-frontend --rm -d -p 3000:3000 goals-react 
+//if there is an error can try add -it param. For example
+
+Docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
