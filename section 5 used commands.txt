@@ -1,1 +1,55 @@
-docker run --name mongodb --rm -d mongo
+//Commands used to dockerize mongoDb in section 5
+
+docker run --name mongodb -p 27017:27017 --rm -d mongo
+docker logs mongodb
+
+
+
+//Commands used to dockerize nodes app
+
+1.creating docker file to put project into a container
+
+FROM node:14
+
+WORKDIR /app
+
+COPY package.json /app
+
+RUN npm install
+
+COPY . /app
+
+EXPOSE 80
+
+CMD [ "node", "app.js" ]
+
+
+
+
+2.Clear all unused images /not obligatory/
+
+docker image prune -a
+
+
+3.Buid image from a dockerfile 
+
+docker build -t goals-node .
+
+
+mongoose.connect(
+  'mongodb://localhost:27017/course-goals',
+
+
+Must change localhost to host.docker.internal (this a special identifier which is translating your real localhost machine ip by Docker) in app.js
+
+mongodb://host.docker.internal:27017/course-goals'
+  
+Because of the changing localhost with the host.docker.internal, now we must rebuild image again
+
+docker build -t goals-node .
+
+docker run --name goals-backend --rm goals-node 
+
+docker stop goals-backend
+
+docker run --name goals-backend --rm -d -p 80:80 goals-node
