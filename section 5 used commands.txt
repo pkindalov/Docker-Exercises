@@ -81,4 +81,51 @@ docker build -t goals-react .
 docker run --name goals-frontend --rm -d -p 3000:3000 goals-react 
 //if there is an error can try add -it param. For example
 
-Docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
+docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
+
+
+
+
+//adding a docker networks for efficient cross-container
+
+docker network ls
+docker network create goals-net
+
+docker run --name mongodb --rm -d --network goals-net mongo
+docker run --name goals-backend --rm -d --network goals-net goals-node
+
+//in the backend folder must change mongodb://host.docker.internal:27017/course-goals' to 
+//mongodb://mongodb(name of container):27017/course-goals' and then rebuild the image
+
+docker build -t goals-node .
+docker run --name goals-backend --rm -d --network goals-net goals-node
+
+//in the frontend folder we must change every localhost with the name of the container. In this
+//case we are trying to connect frontend with a backend, so the name of the backend container is
+//goals-backend and must replace in localhost in frontend/app.js For example
+//const response = await fetch("http://localhost/goals/" + goalId ... must become
+//const response = await fetch("http://goals-backend/goals/" + goalId, {
+
+//because react runs in the browser but not in the server or container in the links must be 
+//localhost, not host.docker.internal or container_name. For example all links must be this way
+//const response = await fetch("http://localhost/goals/" + goalId, NOT
+//const response = await fetch("http://host.docker.internal/goals/" + goalId OR
+//const response = await fetch("http://goals-backend/goals/" + goalId,
+
+docker build -t goals-react .
+docker run --name goals-frontend --network goals-net --rm -p 3000:3000 -it goals-react
+
+Docker stop goals-react 
+//because the links were with wrong addresses. Used container name instead of localhost. 
+//And we using here localhost, because react is running in the browser, not in a container or 
+//on the server
+
+//now fixed addresses of the links and will rebuild the image and start the container again
+docker build -t goals-react .
+
+docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
+
+docker stop goals-backend
+
+docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+
