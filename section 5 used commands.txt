@@ -129,3 +129,16 @@ docker stop goals-backend
 
 docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
 
+
+//data persisting mongodb
+docker run --name mongodb -v data:/data/db --rm -d --network goals-net mongo
+
+//authenticated mongodb
+docker stop mongodb
+
+docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=pkindalov -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+
+//must use mongodb://max:secret@mongodb:27017/course-goals in code and the to rebuild image
+docker stop goals-backend
+docker build -t goals-node .
+docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
