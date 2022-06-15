@@ -171,3 +171,5 @@ mongoose.connect(
   docker run --name goals-backend -v "/Users/panayotkindalov/Desktop/Docker-Exercises/section 5.2  mongoDb service dockerized/backend":/app -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=pkindalov -d --rm -p 80:80 --network goals-net goals-node
   
   
+//Live Source Code Update for react - using a bind mount
+docker run -v "/Users/panayotkindalov/Desktop/Docker-Exercises/section 5.2  mongoDb service dockerized/frontend/src":/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
