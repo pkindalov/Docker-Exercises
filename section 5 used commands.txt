@@ -136,9 +136,38 @@ docker run --name mongodb -v data:/data/db --rm -d --network goals-net mongo
 //authenticated mongodb
 docker stop mongodb
 
-docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=pkindalov -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=username -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
 
-//must use mongodb://max:secret@mongodb:27017/course-goals in code and the to rebuild image
+//must use mongodb://username:secret@mongodb:27017/course-goals in code and the to rebuild image
 docker stop goals-backend
 docker build -t goals-node .
 docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+
+
+//Data persist node
+docker stop goals-backend
+
+docker run --name goals-backend -v "/Users/panayotkindalov/Desktop/Docker-Exercises/section 5.2  mongoDb service dockerized/backend":/app -v logs:/app/logs -v /app/node_modules -d --rm -p 80:80 --network goals-net goals-node
+
+//added nodemon in package.json. Also added "start": "nodemon app.js" in scripts object. Delete package-lock.json 
+//and updated Dockerfile - instead of CMD["node", "app.js"], now it must be CMD ["npm", "start"];
+
+docker stop goals-backend
+docker build -t goals-node .
+
+//added environment variables containing username and password for the demo in Dockerfile
+ENV MONGODB_USERNAME pkindalov
+ENV MONGODB_PASSWORD secret
+//, a then used them in app.js in backend folder
+
+mongoose.connect(
+  `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`,
+  
+  //now must stop old container and build the image from the dockerfile
+  docker stop goals-backend
+  
+  docker build -t goals-node .
+  
+  docker run --name goals-backend -v "/Users/panayotkindalov/Desktop/Docker-Exercises/section 5.2  mongoDb service dockerized/backend":/app -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=pkindalov -d --rm -p 80:80 --network goals-net goals-node
+  
+  
