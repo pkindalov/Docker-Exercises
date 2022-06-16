@@ -12,8 +12,24 @@ services:
       - ./env/mongo.env
     # networks:
     #   - goals-net
-  # backend:
-
+  backend:
+    build: ./backend
+    #longer form
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    # args:
+    #   some-arg: 1
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs #named volume
+      - ./backend:/app #bind mount
+      - /app/node_modules #anonymous volume
+    env_file:
+      - ./env/backend.env
+    depends_on: #available only on docker-compose, but not in docker run
+      - mongodb
   # frontend:
 
 #named volumes must be specified here.
@@ -21,3 +37,4 @@ services:
 #be specified here
 volumes:
   data:
+  logs:
