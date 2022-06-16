@@ -1,0 +1,13 @@
+//creating docker-compose.yaml
+
+version: "3.8" 
+
+//version of the docker compose specification we wanna use. Has an effect on the features we can use in this
+//compose file. More info on docs.docker.com/compose/compose-file/
+
+//all services in docker compose are set in one network by default. But still we can set containers to be in our network and not
+//this created by default.
+
+//for named volumes, the key volumes must be next to the services /on the same level, without spaces/. If you use same volume
+//name to different services/containers/, then the volume will be shared, so different containers can use the same volume, 
+//the same folder on your hosting machine.

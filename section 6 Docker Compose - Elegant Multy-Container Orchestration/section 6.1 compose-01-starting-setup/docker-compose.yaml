@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    # environment:
+    # MONGODB_USERNAME: max
+    # MONGODB_PASSWORD: secret
+    #- MONGODB_USERNAME=max
+    env_file:
+      - ./env/mongo.env
+    # networks:
+    #   - goals-net
+  backend:
+
+  frontend:
+
+#named volumes must be specified here.
+#anonymous volumes and bind mounts don't need to
+#be specified here
+volumes:
+  data:
