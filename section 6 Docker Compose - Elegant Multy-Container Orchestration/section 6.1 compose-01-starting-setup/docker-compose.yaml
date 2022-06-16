@@ -12,9 +12,9 @@ services:
       - ./env/mongo.env
     # networks:
     #   - goals-net
-  backend:
+  # backend:
 
-  frontend:
+  # frontend:
 
 #named volumes must be specified here.
 #anonymous volumes and bind mounts don't need to

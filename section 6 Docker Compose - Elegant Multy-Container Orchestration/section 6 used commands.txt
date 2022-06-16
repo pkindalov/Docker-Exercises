@@ -11,3 +11,27 @@ version: "3.8"
 //for named volumes, the key volumes must be next to the services /on the same level, without spaces/. If you use same volume
 //name to different services/containers/, then the volume will be shared, so different containers can use the same volume, 
 //the same folder on your hosting machine.
+
+//how to start services/containers/ with docker-compose?
+//we must open a terminal from directory where docker-compose.yaml is located and then write the following command
+
+docker-compose up
+
+//and then it will not only start the contianers, it also will pull and build all images that can be required
+
+//following commands clear all images I have on the system, so to start on fresh
+docker image prune
+docker image prune - a
+docker container prune
+
+//then from the directory when is docker-compose.yaml located start terminal and write
+docker-compose up
+
+//if we don't want to start in detached mode then we can use -d in docker-compose up command
+docker-compose up -d
+
+//now if we want to stop all services and remove all containers and so on, we can write
+docker-compose down 
+
+ //it don't delete the volumes. If you want to do that you can use -v flag in the following way
+ docker-compose down -v
