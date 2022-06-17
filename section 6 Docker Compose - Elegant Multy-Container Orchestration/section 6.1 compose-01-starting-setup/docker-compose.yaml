@@ -4,6 +4,7 @@ services:
     image: "mongo"
     volumes:
       - data:/data/db
+    #container_name: mongodb
     # environment:
     # MONGODB_USERNAME: max
     # MONGODB_PASSWORD: secret
@@ -30,7 +31,16 @@ services:
       - ./env/backend.env
     depends_on: #available only on docker-compose, but not in docker run
       - mongodb
-  # frontend:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true #tell docker that this service need an open input connection
+    tty: true #for attaching a terminal
+    depends_on:
+      - backend
 
 #named volumes must be specified here.
 #anonymous volumes and bind mounts don't need to

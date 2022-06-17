@@ -35,3 +35,18 @@ docker-compose down
 
  //it don't delete the volumes. If you want to do that you can use -v flag in the following way
  docker-compose down -v
+ 
+ docker-compose up --build //force docker to rebuild the image
+ 
+ docker-compose up --help //show all other available options
+ 
+ //if you just want to build any custom images define it in the docker-compose file you can do that with docker-compose build
+ docker-compose build  //this command is included when execute docker-compose up
+ 
+ docker-compose build  //only build without start containers
+ 
+ //about the containers name in docker-compose.yaml. You can set name of the container by using container_name
+ //You can see example usage in section 6.1 compose-01-starting-setup folder
+ container_name: mongodb
+ 
+ 
