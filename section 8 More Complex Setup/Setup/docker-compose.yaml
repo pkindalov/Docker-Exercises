@@ -7,7 +7,14 @@ services:
       - "8000:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx.conf:ro
-  # php:
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/hmtl:delegated
+    ports:
+      - "3000:9000"
   # mysql:
   # composer:
   # artisan:
