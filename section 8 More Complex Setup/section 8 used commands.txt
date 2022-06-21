@@ -1,0 +1,15 @@
+//you can run individual containers in your docker yaml file
+//with the following command
+
+docker-compose run
+
+docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
+docker-compose up -d server php mysql
+
+docker-compose up -d server
+docker-compose down
+
+//--builds force docker-compose to rebuild the images if there is some change. If there is no change it will just reuse it.
+docker-compose up -d --build server	
+
+

@@ -1,0 +1,24 @@
+To run this setup you must execute the following steps:
+1.The docker must run. If not now is the moment to start it.
+2.Run the terminal from the directory when the docker-compose.yaml is located and then 
+execute this command
+
+docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
+
+3.After finished the step 2 and there are no errors the execute the next command
+
+docker-compose up -d --buld server
+
+4.After finish the previous command then go to browser and write localhost:8000 and
+if everything is normal you must see laravel starting page.
+
+5.To stop containers you just need to execute
+docker-compose down
+
+to start them again
+docker-compose up -d --build server
+
+
+//Side nodes
+-if you want to remove content of the src folder, it is better to delete src folder instead
+only it content. If you need for this then delete the src folder and then create it again.
