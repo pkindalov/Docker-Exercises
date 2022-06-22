@@ -8,16 +8,47 @@ docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
 
 4.After finished the step 2 and there are no errors the execute the next command
 
-docker-compose up -d --buld server
+docker-compose up -d --build server
 
 5.After finish the previous command then go to browser and write localhost:8000 and
 if everything is normal you must see laravel starting page.
 
-6.To stop containers you just need to execute
+6.If you use Laravel, don't forget to change .env file in src folder which are Laravel environment settings.
+For example laravel's default MySQL settings are
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+
+Now they must be changed to
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+Turn attention to DB_HOST variable which now contains the name of the container for database.
+In our case the name of the service container is called mysql. It can be saw in docker-compose.yaml file
+
+To test if the database connection is correct you can run the following command
+
+docker-compose run --rm artisan migrate
+
+If there are no errors then everything is okay.
+
+
+
+To stop containers you just need to execute
 docker-compose down
 
 to start them again
 docker-compose up -d --build server
+
+docker-compose run --rm artisan migrate
 
 
 //Side notes
